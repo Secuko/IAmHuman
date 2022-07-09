@@ -12,13 +12,12 @@ class RegisterWindow extends StatefulWidget {
 }
 
 class RegisterWindowState extends State<RegisterWindow> {
-  double getOpacity() {
+  Color getOpacity() {
     int _hour = (DateTime.now()).hour;
-    //int _hour = 2;
     if ((_hour >= 15) || (_hour < 3)) {
-      return 0.5;
+      return Color.fromRGBO(255, 255, 255, 0.4);
     } else
-      return 0.0;
+      return Color.fromRGBO(0, 0, 0, 0.1);
   }
 
   @override
@@ -28,10 +27,10 @@ class RegisterWindowState extends State<RegisterWindow> {
       margin: EdgeInsets.only(top: ((MediaQuery.of(context).size.height) / 6)),
       height: 305,
       width: 230,
-      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+      padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15.0),
-        color: Color.fromRGBO(255, 255, 255, getOpacity()),
+        color: getOpacity(),
       ),
       //color: Colors.white,
       alignment: FractionalOffset(0.5, 0.5),

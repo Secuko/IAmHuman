@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:i_am_human/utils/utils.dart';
 import 'package:i_am_human/screens/registration_screen.dart';
+import 'package:i_am_human/screens/login_screen.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -45,7 +46,7 @@ class HomeState extends State<Home> {
               color: AppColors.blue,
               child: _getBackgroundImage(),
             ),
-            RegisterWindow(),
+            LoginWindow(),
           ],
         ),
       ),
