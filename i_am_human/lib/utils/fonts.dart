@@ -31,4 +31,12 @@ class AppTypography {
     fontWeight: FontWeight.normal,
     fontSize: 20,
   );
+
+  static final font12 = TextStyle(
+    color: AppColors.white,
+    fontFamily: _roboslab,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.normal,
+    fontSize: 12,
+  );
 }
