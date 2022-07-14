@@ -8,15 +8,28 @@ class TextUnderInputField extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return Container(
+        padding: EdgeInsets.only(left:5, top: 3, bottom: 3, right:5),
+        //margin: EdgeInsets.symmetric(vertical: 3.0),
+        child: Text(
+          str,
+          style: AppTypography.font12,
+        ),
+      );
+  }
+}
+
+
+/*return GestureDetector(
       onTap: () => print(''),
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 10.0),
+        color: Colors.blue,
+        //height: 60,
+        padding: EdgeInsets.all(5),
+        //margin: EdgeInsets.symmetric(vertical: 3.0),
         child: Text(
           str,
           style: AppTypography.font12,
         ),
       ),
-    );
-  }
-}
+    );*/

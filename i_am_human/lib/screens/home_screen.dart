@@ -13,7 +13,15 @@ class Home extends StatefulWidget {
 }
 
 class HomeState extends State<Home> {
-  Widget _getBackgroundImage() {
+  StatefulWidget window = RegisterWindow();
+
+  void ChangeHomeStatus(StatefulWidget window) {
+    setState(() {
+      this.window = window;
+    });
+  }
+
+  Widget BackgroundImage() {
     final now = DateTime.now();
     int _hours = now.hour;
     //int _hours = 2;
@@ -27,9 +35,15 @@ class HomeState extends State<Home> {
     } else {
       imageName = "backgroundNight";
     }
-    return Image(
-      image: AssetImage('assets/background/' + imageName + '.jpg'),
-      fit: BoxFit.cover,
+
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      //color: AppColors.blue,
+      child: Image(
+        image: AssetImage('assets/background/' + imageName + '.jpg'),
+        fit: BoxFit.cover,
+      ),
     );
   }
 
@@ -40,12 +54,7 @@ class HomeState extends State<Home> {
         child: Stack(
           alignment: AlignmentDirectional.topCenter,
           children: <Widget>[
-            Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              color: AppColors.blue,
-              child: _getBackgroundImage(),
-            ),
+            //BackgroundImage(),
             LoginWindow(),
           ],
         ),

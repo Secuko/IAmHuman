@@ -22,26 +22,39 @@ class RegisterWindowState extends State<RegisterWindow> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      //margin: EdgeInsets.only(top: 160),
-      margin: EdgeInsets.only(top: ((MediaQuery.of(context).size.height) / 6)),
-      height: 305,
-      width: 230,
-      padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15.0),
-        color: getOpacity(),
-      ),
-      //color: Colors.white,
-      alignment: FractionalOffset(0.5, 0.5),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+    return Scaffold(
+      body: Stack(
+        alignment: AlignmentDirectional.topCenter,
         children: [
-          InputElem("Name"),
-          InputElem("Login"),
-          InputElem("Password"),
-          TextUnderInputField('Already have an account?'),
-          BottomButton('Sign Up'),
+          BackgroundImage(),
+          Container(
+            //margin: EdgeInsets.only(top: 160),
+            margin: EdgeInsets.only(
+                top: ((MediaQuery.of(context).size.height) / 6)),
+            height: 305,
+            width: 230,
+            padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15.0),
+              color: getOpacity(),
+            ),
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                InputElem("Name"),
+                InputElem("Login"),
+                InputElem("Password"),
+                GestureDetector(
+                  onTap: () => Navigator.of(context)
+                      .pushReplacementNamed('/login_screen'),
+                  child: TextUnderInputField('Already have an account?'),
+                ),
+                BottomButton('Sign Up'),
+              ],
+            ),
+          ),
         ],
       ),
     );

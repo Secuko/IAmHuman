@@ -1,8 +1,8 @@
-import 'dart:html';
+//import 'dart:html';
 import 'package:i_am_human/utils/utils.dart';
 import 'package:flutter/material.dart';
 
-class InputElem extends StatefulWidget {
+/*class InputElem extends StatefulWidget {
   //const InputElem({Key? key}) : super(key: key);
 
   String labelText = "";
@@ -16,12 +16,12 @@ class InputElem extends StatefulWidget {
   State<StatefulWidget> createState() {
     return InputElemState(labelText);
   }
-}
+}*/
 
-class InputElemState extends State<InputElem> {
+class InputElem extends StatelessWidget {
   bool isPassword = false;
   String labelText = "";
-  InputElemState(String labelText) {
+  InputElem(String labelText) {
     this.isPassword = (labelText == "Password");
     this.labelText = labelText;
   }
