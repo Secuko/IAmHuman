@@ -15,6 +15,8 @@ class UserAccountScreen extends StatefulWidget {
 }
 
 class UserAccountScreenState extends State<UserAccountScreen> {
+  String name = "Artem";
+  String surname = "Silaev";
   int _selectedIndex = 0;
   void _onItemTapped(int index) {
     setState(() {
@@ -59,11 +61,100 @@ class UserAccountScreenState extends State<UserAccountScreen> {
                       ),
                       Flexible(
                         flex: 4,
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.all(4),
+                                //color: AppColors.white,
+                                child: Text('$name  $surname',
+                                    style: AppTypography.font20B),
+                              ),
+                              Container(
+                                //color: AppColors.white,
+                                child: Text('examplemail@gmail.com',
+                                    style: AppTypography.font14B),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: 5),
+                                child: Text(
+                                  'Vladimir, Russia',
+                                  style: AppTypography.font14B,
+                                )
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                margin: EdgeInsets.only(top: 10),
+                                child: Text(
+                                  '"' + 'Я Наруто Удзумаки! И да, кстати, я будущий хокаге.' + '"',
+                                  style: AppTypography.font16B,
+                                )
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  height: 100,
+                  width: MediaQuery.of(context).size.width,
+                  color: AppColors.blue,
+                  child: Row(
+                    //crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Flexible(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              color: AppColors.white,
+                              child: Text(
+                                "Age",
+                                style: AppTypography.font16B,
+                              ),
+                            ),
+                            Container(
+                              child: Text(
+                                "18",
+                                style: AppTypography.font16B,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Flexible(
+                        child: Column(
+                          children: [
+                            Container(
+                              child: Text(
+                                "weight",
+                                style: AppTypography.font16B,
+                              ),
+                            ),
+                            Container(
+                              child: Text(
+                                "75",
+                                style: AppTypography.font16B,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Flexible(
+                        child: Column(
+                          children: [
+                            Container(
+                              child: Text(
+                                "Height",
+                                style: AppTypography.font16B,
+                              ),
+                            ),
+                            Container(
+                              child: Text(
+                                "180",
+                                style: AppTypography.font16B,
+                              ),
                             ),
                           ],
                         ),
