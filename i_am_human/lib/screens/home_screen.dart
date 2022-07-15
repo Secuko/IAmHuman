@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:i_am_human/utils/utils.dart';
 import 'package:i_am_human/screens/registration_screen.dart';
 import 'package:i_am_human/screens/login_screen.dart';
+import 'package:i_am_human/screens/user_account_screen.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -21,32 +22,6 @@ class HomeState extends State<Home> {
     });
   }
 
-  Widget BackgroundImage() {
-    final now = DateTime.now();
-    int _hours = now.hour;
-    //int _hours = 2;
-    String imageName = "";
-    if ((_hours >= 3) && (_hours < 9)) {
-      imageName = "backgroundMorning";
-    } else if ((_hours >= 9) && (_hours < 15)) {
-      imageName = "backgroundDay";
-    } else if ((_hours >= 15) && (_hours < 21)) {
-      imageName = "backgroundEvening";
-    } else {
-      imageName = "backgroundNight";
-    }
-
-    return Container(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-      //color: AppColors.blue,
-      child: Image(
-        image: AssetImage('assets/background/' + imageName + '.jpg'),
-        fit: BoxFit.cover,
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,8 +29,7 @@ class HomeState extends State<Home> {
         child: Stack(
           alignment: AlignmentDirectional.topCenter,
           children: <Widget>[
-            //BackgroundImage(),
-            LoginWindow(),
+            UserAccountScreen(),
           ],
         ),
       ),

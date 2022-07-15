@@ -5,6 +5,7 @@ import 'package:i_am_human/screens/login_screen.dart';
 import 'package:i_am_human/screens/registration_screen.dart';
 import 'package:i_am_human/utils/utils.dart';
 import 'package:i_am_human/screens/home_screen.dart';
+import 'package:i_am_human/screens/user_account_screen.dart';
 
 void main() {
   runApp(const HumanAppStart());
@@ -21,7 +22,8 @@ class HumanAppStart extends StatelessWidget {
       routes: {
         '/': (context) => Home(),
         '/registration_screen': (context) => RegisterWindow(),
-        '/login_screen': (context) => LoginWindow()
+        '/login_screen': (context) => LoginWindow(),
+        'user_account_Screen':(context) => UserAccountScreen(),
       },
       theme: ThemeData(
         fontFamily: 'RobotoSlab',

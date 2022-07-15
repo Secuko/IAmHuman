@@ -6,9 +6,7 @@ import 'package:i_am_human/screens/home_screen.dart';
 
 class BottomButton extends StatelessWidget {
   String str = "";
-  BottomButton(String str) {
-    this.str = str;
-  }
+  BottomButton(this.str);
   @override
   Widget build(BuildContext context) {
     return Container(
