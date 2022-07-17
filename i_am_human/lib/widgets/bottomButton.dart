@@ -15,7 +15,7 @@ class BottomButton extends StatelessWidget {
         color: AppColors.black,
         gradient: LinearGradient(
           begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+          end: Alignment.bottomRight, 
           colors: <Color>[
             Colors.black45,
             Colors.white24,
