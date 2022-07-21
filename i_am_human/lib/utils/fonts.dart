@@ -71,4 +71,12 @@ class AppTypography {
     fontWeight: FontWeight.normal,
     fontSize: 12,
   );
+
+  static final errorfont16B = TextStyle(
+    color: AppColors.errorRed,
+    fontFamily: _roboslab,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w900,
+    fontSize: 12,
+  );
 }

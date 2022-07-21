@@ -12,4 +12,5 @@ abstract class AppColors {
   static const Color green = Colors.green;
   static const Color greenLight = Color.fromARGB(255, 126, 231, 100);
   static const Color greenWhite = Color.fromARGB(255, 167, 233, 152);
+  static const Color errorRed = Color.fromARGB(255, 238, 86, 66);
 }

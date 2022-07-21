@@ -14,22 +14,33 @@ class LoginWindow extends StatefulWidget {
 }
 
 class LoginWindowState extends State<LoginWindow> {
-  //double marginTop =(MediaQuery.of(context).size.height) / 6;
   double height = 250;
   bool detector = false;
+  final _loginTextController = TextEditingController();
+  final _passwordTextController = TextEditingController();
+  String _textError = ''; 
+  bool _error = false;
 
-  Color getOpacity() {
+  static Color getOpacity() {
     int _hour = (DateTime.now()).hour;
-    if ((_hour >= 15) || (_hour < 3)) {
+    if ((_hour >= 21) || (_hour < 3)) {
       return Color.fromRGBO(255, 255, 255, 0.4);
     } else
-      return Color.fromRGBO(0, 0, 0, 0.1);
+      return Color.fromRGBO(0, 0, 0, 0.4);
   }
 
-  void _ChangeState() {
+  void _auth(){
+    final String login = _loginTextController.text;
+    final String password = _passwordTextController.text;
+    print(login + password);
+    if (login == 'admin' && password == 'admin'){
+      Navigator.of(context).pushReplacementNamed('/user_account_Screen');
+    } else {
+      _error=true;
+    _textError = 'error';
     setState(() {
-      detector = !detector;
     });
+    }
   }
 
   @override
@@ -40,29 +51,31 @@ class LoginWindowState extends State<LoginWindow> {
         children: [
           BackgroundImage(),
           Container(
-            //margin: EdgeInsets.only(top: 160),
             margin: EdgeInsets.only(
                 top: ((MediaQuery.of(context).size.height) / 6)),
-            height: (detector) ? 350 : 250,
+            height: 230,
             width: 230,
             padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15.0),
               color: getOpacity(),
             ),
-            //color: Colors.white,
             alignment: FractionalOffset(0.5, 0.5),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                InputElem("Login"),
-                InputElem("Password"),
+                if (_error) errorTextWidget(_textError),
+                InputElem("Login", _loginTextController),
+                InputElem("Password",_passwordTextController),
                 GestureDetector(
                   onTap: () => Navigator.of(context)
                       .pushReplacementNamed('/registration_screen'),
                   child: TextUnderInputField('Have no an account?'),
                 ),
-                BottomButton('Sign In'),
+                GestureDetector(
+                  onTap: _auth,
+                  child: BottomButton('Sign In'),
+                ),
               ],
             ),
           ),

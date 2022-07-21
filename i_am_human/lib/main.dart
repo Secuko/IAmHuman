@@ -23,7 +23,7 @@ class HumanAppStart extends StatelessWidget {
         '/': (context) => Home(),
         '/registration_screen': (context) => RegisterWindow(),
         '/login_screen': (context) => LoginWindow(),
-        'user_account_Screen':(context) => UserAccountScreen(),
+        '/user_account_Screen':(context) => UserAccountScreen(),
       },
       theme: ThemeData(
         fontFamily: 'RobotoSlab',

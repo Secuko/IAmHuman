@@ -29,7 +29,8 @@ class HomeState extends State<Home> {
         child: Stack(
           alignment: AlignmentDirectional.topCenter,
           children: <Widget>[
-            UserAccountScreen(),
+            //UserAccountScreen(),
+            window,
           ],
         ),
       ),

@@ -3,8 +3,6 @@ import 'package:i_am_human/utils/utils.dart';
 
 class BackgroundImage extends StatelessWidget {
   final _hours = (DateTime.now()).hour;
-    //int _hours = 2;
-    //String imageName = getBackgroundImage();
     
   String getBackgroundImage(){
     String imageName = '';
