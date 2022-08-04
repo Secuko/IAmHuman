@@ -25,10 +25,10 @@ class AppTypography {
   );
 
   static const font20 = TextStyle(
-    color: AppColors.white,
+    color: AppColors.black,
     fontFamily: _roboslab,
     fontStyle: FontStyle.normal,
-    fontWeight: FontWeight.normal,
+    fontWeight: FontWeight.w500,
     fontSize: 20,
   );
 

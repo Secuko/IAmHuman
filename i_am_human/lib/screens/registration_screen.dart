@@ -13,8 +13,6 @@ class RegisterWindow extends StatefulWidget {
   }
 }
 
-
-
 class RegisterWindowState extends State<RegisterWindow> {
   final _nameTextController = TextEditingController();
   final _loginTextController = TextEditingController();
@@ -29,7 +27,6 @@ class RegisterWindowState extends State<RegisterWindow> {
     final now = DateTime.now();
     final convertedDateTime = "${now.hour.toString().padLeft(2,'0')}:${now.minute.toString().padLeft(2,'0')}";
     final user = User(name, login, password, 0, 0, 0, '', '', '', convertedDateTime);
-    //print('${user.name}' '${user.email}'  '${user.password}');
     await OperationsWithData.setUserData(user);
     SupportPreferencesMethods.changeUserStatus();
     final userStatus = await SupportPreferencesMethods.getUserStatus();

@@ -112,14 +112,6 @@ class _UserAccountMainWidgetState extends State<UserAccountMainWidget> {
     );
   }
 
-  double _getImageFrameParametr(double width) {
-    if (width < 300) {
-      return width - 30;
-    } else {
-      return 270;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     //getUser(user);
@@ -139,36 +131,9 @@ class _UserAccountMainWidgetState extends State<UserAccountMainWidget> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Flexible(
+                    const Flexible(
                       flex: 3,
-                      child: GestureDetector(
-                        onTap: () => print('Add Image'),
-                        child: Center(
-                          child: Container(
-                            height: _getImageFrameParametr(
-                              screenWidth * 3 / 7,
-                            ),
-                            width: _getImageFrameParametr(
-                              screenWidth * 3 / 7,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                _getImageFrameParametr(
-                                  screenWidth * 3 / 14,
-                                ),
-                              ),
-                              color: AppColors.whiteLight,
-                            ),
-                            child: const SizedBox(
-                              height: 100,
-                              width: 100,
-                              child: Image(
-                                image: AssetImage('assets/icon/addIcon.jpg'),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                      child: UserProfileImage(),
                     ),
                     Flexible(
                       flex: 4,
@@ -263,28 +228,55 @@ class _UserAccountSettingsWidgetState extends State<UserAccountSettingsWidget> {
     SettingElementData(Icons.contact_phone, 'Phone'),
   ];
 
+  Widget _textUponMenu(String text) {
+    return Container(
+      alignment: Alignment.topLeft,
+      margin: const EdgeInsets.only(left: 50),
+      padding: const EdgeInsets.symmetric(vertical: 3),
+      child: Text(
+        text,
+        style: AppTypography.font20B,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
-      child: Container(
-        width: 400,
-        color: AppColors.whiteLight,
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
-        alignment: Alignment.topCenter,
-        child: Column(
-          children: <Widget>[
-            SettingElementList(listElement: commonSettings),
-            const SizedBox(
-              height: 30,
-            ),
-            SettingElementList(listElement: privacySettings),
-            const SizedBox(
-              height: 30,
-            ),
-            const LogoutButton(),
-          ],
+      child: ConstrainedBox(
+        constraints:
+            BoxConstraints(maxWidth: 400, minHeight: screenHeight - 56),
+        child: Container(
+          color: AppColors.whiteLight,
+          child: Column(
+            children: [
+              Container(
+                color: AppColors.green,
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: const UserProfileImage(),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
+                child: Column(
+                  children: <Widget>[
+                    _textUponMenu('Common Settings'),
+                    SettingElementList(listElement: commonSettings),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    _textUponMenu('Privacy Settings'),
+                    SettingElementList(listElement: privacySettings),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    const LogoutButton(),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -305,8 +297,11 @@ class SettingElementList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-      color: AppColors.greenLight,
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25),
+        color: AppColors.whiteGrey,
+      ),
       child: Column(
         children:
             listElement.map((data) => SettingElement(data: data)).toList(),
@@ -320,20 +315,26 @@ class SettingElement extends StatelessWidget {
   final SettingElementData data;
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          margin: const EdgeInsets.only(right: 15),
-          child: Icon(data.icon),
+    return GestureDetector(
+      onTap: () => print(data.text),
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 5),
+        child: Row(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(right: 15),
+              child: Icon(data.icon),
+            ),
+            Expanded(
+              child: Text(
+                data.text,
+                style: AppTypography.font20,
+              ),
+            ),
+            const Icon(Icons.chevron_right_sharp),
+          ],
         ),
-        Expanded(
-          child: Text(
-            data.text,
-            style: AppTypography.font20B,
-          ),
-        ),
-        const Icon(Icons.chevron_right_sharp),
-      ],
+      ),
     );
   }
 }
@@ -346,7 +347,7 @@ class LogoutButton extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         SupportPreferencesMethods.changeUserStatus;
-        Navigator.of(context).pushReplacementNamed('/registration_screen');
+        Navigator.of(context).pushReplacementNamed('/');
       },
       child: Container(
         height: 80,
@@ -354,11 +355,55 @@ class LogoutButton extends StatelessWidget {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
-          color: AppColors.blackWithOpacity,
+          color: AppColors.blackGrey,
         ),
         child: const Text(
           'Logout',
           style: AppTypography.font20B,
+        ),
+      ),
+    );
+  }
+}
+
+class UserProfileImage extends StatelessWidget {
+  const UserProfileImage({Key? key}) : super(key: key);
+  double _getImageFrameParametr(double width) {
+    if (width < 300) {
+      return width - 30;
+    } else {
+      return 270;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    return GestureDetector(
+      onTap: () => print('Add Image'),
+      child: Center(
+        child: Container(
+          height: _getImageFrameParametr(
+            screenWidth * 3 / 7,
+          ),
+          width: _getImageFrameParametr(
+            screenWidth * 3 / 7,
+          ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(
+              _getImageFrameParametr(
+                screenWidth * 3 / 14,
+              ),
+            ),
+            color: AppColors.whiteLight,
+          ),
+          child: const SizedBox(
+            height: 100,
+            width: 100,
+            child: Image(
+              image: AssetImage('assets/icon/addIcon.jpg'),
+            ),
+          ),
         ),
       ),
     );
