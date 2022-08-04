@@ -1,11 +1,11 @@
 //import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:i_am_human/screens/home_screen.dart';
 import 'package:i_am_human/screens/login_screen.dart';
 import 'package:i_am_human/screens/registration_screen.dart';
-import 'package:i_am_human/utils/utils.dart';
-import 'package:i_am_human/screens/home_screen.dart';
 import 'package:i_am_human/screens/user_account_screen.dart';
+import 'package:i_am_human/utils/utils.dart';
 
 void main() {
   runApp(const HumanAppStart());
@@ -20,24 +20,26 @@ class HumanAppStart extends StatelessWidget {
       title: 'IAmHuman',
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) => Home(),
-        '/registration_screen': (context) => RegisterWindow(),
-        '/login_screen': (context) => LoginWindow(),
-        '/user_account_Screen':(context) => UserAccountScreen(),
+        '/': (context) => const Home(),
+        '/registration_screen': (context) => const RegisterWindow(),
+        '/login_screen': (context) => const LoginWindow(),
+        '/user_account_screen': (context) => const UserAccountScreen(),
       },
       theme: ThemeData(
         fontFamily: 'RobotoSlab',
         scaffoldBackgroundColor: AppColors.white,
       ),
       initialRoute: '/',
-      onGenerateRoute: (RouteSettings settings) {
-        return MaterialPageRoute<void>(builder: (context) {
-          return Scaffold(
-            body: Center(
-              child: Text('Navigation error'),
-            ),
-          );
-        });
+      onGenerateRoute: (settings) {
+        return MaterialPageRoute<void>(
+          builder: (context) {
+            return const Scaffold(
+              body: Center(
+                child: Text('Navigation error'),
+              ),
+            );
+          },
+        );
       },
     );
   }

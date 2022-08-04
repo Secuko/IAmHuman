@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:i_am_human/utils/utils.dart';
 
-class errorTextWidget extends StatelessWidget {
-  String  str = '';
-  errorTextWidget(String str) {
-    this.str = str;
-  }
+class ErrorTextWidget extends StatelessWidget {
+  const ErrorTextWidget(this.str);
+  final String str;
   @override
   Widget build(BuildContext context) {
     return Container(

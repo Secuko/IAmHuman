@@ -13,4 +13,6 @@ abstract class AppColors {
   static const Color greenLight = Color.fromARGB(255, 126, 231, 100);
   static const Color greenWhite = Color.fromARGB(255, 167, 233, 152);
   static const Color errorRed = Color.fromARGB(255, 238, 86, 66);
+  static const Color whiteWithOpacity = Color.fromRGBO(255, 255, 255, 0.4);
+  static const Color blackWithOpacity = Color.fromRGBO(0, 0, 0, 0.4);
 }

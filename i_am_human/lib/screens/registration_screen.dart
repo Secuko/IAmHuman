@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:i_am_human/utils/utils.dart';
-import 'package:i_am_human/widgets/widgets.dart';
+import 'package:i_am_human/data_access/shared_preferences.dart';
+import 'package:i_am_human/models/user.dart';
 import 'package:i_am_human/screens/login_screen.dart';
+import 'package:i_am_human/widgets/widgets.dart';
 
 class RegisterWindow extends StatefulWidget {
   const RegisterWindow({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return new RegisterWindowState();
+    return RegisterWindowState();
   }
 }
 
@@ -21,19 +22,28 @@ class RegisterWindowState extends State<RegisterWindow> {
   String _textError = ''; 
   bool _error = false;
 
-  void _createAccount(){
-    final String name = _nameTextController.text;
-    final String login = _loginTextController.text;
-    final String password = _passwordTextController.text;
-    print(name + login + password);
-    _error=true;
-    _textError = 'error';
-    setState(() {
-    });
+  void _createAccount() async {
+    final name = _nameTextController.text;
+    final login = _loginTextController.text;
+    final password = _passwordTextController.text;
+    final now = DateTime.now();
+    final convertedDateTime = "${now.hour.toString().padLeft(2,'0')}:${now.minute.toString().padLeft(2,'0')}";
+    final user = User(name, login, password, 0, 0, 0, '', '', '', convertedDateTime);
+    //print('${user.name}' '${user.email}'  '${user.password}');
+    await OperationsWithData.setUserData(user);
+    SupportPreferencesMethods.changeUserStatus();
+    final userStatus = await SupportPreferencesMethods.getUserStatus();
+    print('${user.name}' '${user.email}'  '${user.password}' '$userStatus');
+    //Navigator.of(context).pushReplacementNamed('/user_account_Screen');
+  }
+
+  String? errorValidator(){
+    return 'Error';
   }
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Stack(
         alignment: AlignmentDirectional.topCenter,
@@ -42,30 +52,30 @@ class RegisterWindowState extends State<RegisterWindow> {
           Container(
             //margin: EdgeInsets.only(top: 160),
             margin: EdgeInsets.only(
-                top: ((MediaQuery.of(context).size.height) / 6)),
+                top: screenHeight / 6,),
             height: 280,
             width: 230,
-            padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15.0),
+              borderRadius: BorderRadius.circular(15),
               color: LoginWindowState.getOpacity(),
             ),
             alignment: Alignment.center,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround, 
               children: [
-                if (_error) errorTextWidget(_textError),
-                InputElem("Name",_nameTextController),
-                InputElem("Login",_loginTextController),
-                InputElem("Password",_passwordTextController),
+                if (_error) ErrorTextWidget(_textError),
+                InputElem('Name',_nameTextController),
+                InputElem('E-mail',_loginTextController),
+                InputElem('Password',_passwordTextController),
                 GestureDetector(
                   onTap: () => Navigator.of(context)
                       .pushReplacementNamed('/login_screen'),
-                  child: TextUnderInputField('Already have an account?'),
+                  child: const TextUnderInputField('Already have an account?'),
                 ),
                 GestureDetector(
                   onTap: _createAccount,
-                  child: BottomButton('Sign Un'),
+                  child: const BottomButton('Register'),
                 ),
               ],
             ),

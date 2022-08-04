@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:i_am_human/utils/utils.dart';
-import 'package:i_am_human/screens/registration_screen.dart';
-import 'package:i_am_human/screens/login_screen.dart';
+import 'package:i_am_human/data_access/shared_preferences.dart';
 import 'package:i_am_human/screens/user_account_screen.dart';
 
 class Home extends StatefulWidget {
@@ -9,17 +7,27 @@ class Home extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return new HomeState();
+    return HomeState();
   }
 }
 
 class HomeState extends State<Home> {
-  StatefulWidget window = RegisterWindow();
+  StatefulWidget window =  const UserAccountScreen();
 
-  void ChangeHomeStatus(StatefulWidget window) {
-    setState(() {
-      this.window = window;
-    });
+  @override
+  void initState() {
+    super.initState();
+    getCurrentScreen();
+  }
+
+  void getCurrentScreen() async {
+    final variable = await SupportPreferencesMethods.getUserStatus();
+    if (variable){
+      await Navigator.of(context).pushReplacementNamed('/user_account_screen');
+    } else {
+      await Navigator.of(context).pushReplacementNamed('/registration_screen');
+    }
+    
   }
 
   @override
@@ -30,7 +38,7 @@ class HomeState extends State<Home> {
           alignment: AlignmentDirectional.topCenter,
           children: <Widget>[
             //UserAccountScreen(),
-            window,
+            //getCurrentScreen(),
           ],
         ),
       ),

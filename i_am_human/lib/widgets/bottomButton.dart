@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:i_am_human/utils/utils.dart';
 
 class BottomButton extends StatelessWidget {
-  String str = "";
-  BottomButton(this.str);
+  const BottomButton(this.str);
+  final String str;
   @override
   Widget build(BuildContext context) {
     return Container(

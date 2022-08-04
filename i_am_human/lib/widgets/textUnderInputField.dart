@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:i_am_human/utils/utils.dart';
 
 class TextUnderInputField extends StatelessWidget {
-  String str = '';
-  TextUnderInputField(String str) {
-    this.str = str;
-  }
+  const TextUnderInputField(this.str);
+  final String str;
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -8,7 +8,7 @@ class AppTypography {
 
   static const _color = AppColors.black;
 
-  static final font9 = TextStyle(
+  static const font9 = TextStyle(
     color: _color,
     fontFamily: _roboslab,
     fontStyle: FontStyle.normal,
@@ -16,7 +16,7 @@ class AppTypography {
     fontSize: 26,
   );
 
-  static final font26 = TextStyle(
+  static const font26 = TextStyle(
     color: AppColors.white,
     fontFamily: _roboslab,
     fontStyle: FontStyle.normal,
@@ -24,7 +24,7 @@ class AppTypography {
     fontSize: 26,
   );
 
-  static final font20 = TextStyle(
+  static const font20 = TextStyle(
     color: AppColors.white,
     fontFamily: _roboslab,
     fontStyle: FontStyle.normal,
@@ -32,7 +32,7 @@ class AppTypography {
     fontSize: 20,
   );
 
-  static final font20B = TextStyle(
+  static const font20B = TextStyle(
     color: AppColors.black,
     fontFamily: _roboslab,
     fontStyle: FontStyle.normal,
@@ -40,7 +40,7 @@ class AppTypography {
     fontSize: 20,
   );
 
-  static final font16B = TextStyle(
+  static const font16B = TextStyle(
     color: AppColors.black,
     fontFamily: _roboslab,
     fontStyle: FontStyle.normal,
@@ -48,15 +48,31 @@ class AppTypography {
     fontSize: 16,
   );
 
-  static final font16S = TextStyle(
+  static const font16 = TextStyle(
     color: AppColors.black,
     fontFamily: _roboslab,
     fontStyle: FontStyle.normal,
-    fontWeight: FontWeight.w100,
+    fontWeight: FontWeight.w500,
     fontSize: 16,
   );
 
-  static final font14B = TextStyle(
+  static const font16S = TextStyle(
+    color: AppColors.black,
+    fontFamily: _roboslab,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w400,
+    fontSize: 16,
+  );
+
+  static const font16w = TextStyle(
+    color: AppColors.white,
+    fontFamily: _roboslab,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w500,
+    fontSize: 16,
+  );
+
+  static const font14B = TextStyle(
     color: AppColors.blue2,
     fontFamily: _roboslab,
     fontStyle: FontStyle.normal,
@@ -64,7 +80,7 @@ class AppTypography {
     fontSize: 14,
   );
 
-  static final font12 = TextStyle(
+  static const font12 = TextStyle(
     color: AppColors.white,
     fontFamily: _roboslab,
     fontStyle: FontStyle.normal,
@@ -72,7 +88,7 @@ class AppTypography {
     fontSize: 12,
   );
 
-  static final errorfont16B = TextStyle(
+  static const errorfont16B = TextStyle(
     color: AppColors.errorRed,
     fontFamily: _roboslab,
     fontStyle: FontStyle.normal,

@@ -1,31 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:i_am_human/utils/utils.dart';
 
 class BackgroundImage extends StatelessWidget {
-  final _hours = (DateTime.now()).hour;
+  final _hours = DateTime.now().hour;
     
   String getBackgroundImage(){
-    String imageName = '';
+    var imageName = '';
     if ((_hours >= 3) && (_hours < 9)) {
-      imageName = "backgroundMorning";
+      imageName = 'backgroundMorning';
     } else if ((_hours >= 9) && (_hours < 15)) {
-      imageName = "backgroundDay";
+      imageName = 'backgroundDay';
     } else if ((_hours >= 15) && (_hours < 21)) {
-      imageName = "backgroundEvening";
+      imageName = 'backgroundEvening';
     } else {
-      imageName = "backgroundNight";
+      imageName = 'backgroundNight';
     }
     return imageName;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       //color: AppColors.blue,
       child: Image(
-        image: AssetImage('assets/background/' + getBackgroundImage() + '.jpg'),
+        image: AssetImage('assets/background/${getBackgroundImage()}.jpg'),
         fit: (MediaQuery.of(context).size.width<MediaQuery.of(context).size.height) ? BoxFit.cover: BoxFit.contain,
       ),
     );

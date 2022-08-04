@@ -1,2 +1,2 @@
-export 'fonts.dart';
 export 'colors.dart';
+export 'fonts.dart';
