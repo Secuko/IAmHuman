@@ -46,9 +46,9 @@ class OperationsWithData {
     ..age = storage.getInt(_SharedPreferencesKeys.ageKey)
     ..city = storage.getString(_SharedPreferencesKeys.cityKey)
     ..country = storage.getString(_SharedPreferencesKeys.countryKey)
-    ..slogan = storage.getString(_SharedPreferencesKeys.sloganKey);
-    //..date = storage.getString(_SharedPreferencesKeys.dateKey);
-    print(user.name + user.email);
+    ..slogan = storage.getString(_SharedPreferencesKeys.sloganKey)
+    ..date = storage.getString(_SharedPreferencesKeys.dateKey);
+    print(user.name + user.email + user.date);
     return user;
   }
 }
@@ -60,9 +60,11 @@ class SupportPreferencesMethods{
     return _storage.getBool(_SharedPreferencesKeys.isLogin) ?? false;
   }
 
-  static void changeUserStatus() async{
+  static Future changeUserStatus() async{
     final  _storage = await SharedPreferences.getInstance();
+    //print('${_storage.getBool(_SharedPreferencesKeys.isLogin) ?? false}'  'before');
     final currentStatus = !(_storage.getBool(_SharedPreferencesKeys.isLogin) ?? false);
+    //print('$currentStatus' 'after');
     await _storage.setBool(_SharedPreferencesKeys.isLogin, currentStatus);
   }
 }

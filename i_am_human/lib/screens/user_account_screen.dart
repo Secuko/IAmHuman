@@ -1,10 +1,7 @@
-//import 'dart:html';
-
 import 'package:flutter/material.dart';
-import 'package:i_am_human/utils/utils.dart';
-import 'package:i_am_human/models/user.dart';
 import 'package:i_am_human/data_access/shared_preferences.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:i_am_human/models/user.dart';
+import 'package:i_am_human/utils/utils.dart';
 
 class UserAccountScreen extends StatefulWidget {
   const UserAccountScreen({Key? key}) : super(key: key);
@@ -28,13 +25,13 @@ class UserAccountScreenState extends State<UserAccountScreen> {
   }
 
   static final List<Widget> _widgetOptions = <Widget>[
-    UserAccountMainWidget(),
+    const UserAccountMainWidget(),
     const Center(
       child: Text(
         'Data API',
       ),
     ),
-    UserAccountSettingsWidget(),
+    const UserAccountSettingsWidget(),
   ];
 
   @override
@@ -116,8 +113,6 @@ class _UserAccountMainWidgetState extends State<UserAccountMainWidget> {
   Widget build(BuildContext context) {
     //getUser(user);
     OperationsWithData.getUserData(user);
-
-    final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
       child: Center(
@@ -242,7 +237,6 @@ class _UserAccountSettingsWidgetState extends State<UserAccountSettingsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
       child: ConstrainedBox(
@@ -254,11 +248,12 @@ class _UserAccountSettingsWidgetState extends State<UserAccountSettingsWidget> {
             children: [
               Container(
                 color: AppColors.green,
-                padding: const EdgeInsets.symmetric(vertical: 10),
+                padding: const EdgeInsets.only(top: 30, bottom: 15),
                 child: const UserProfileImage(),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
                 child: Column(
                   children: <Widget>[
                     _textUponMenu('Common Settings'),
@@ -346,7 +341,7 @@ class LogoutButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        SupportPreferencesMethods.changeUserStatus;
+        SupportPreferencesMethods.changeUserStatus();
         Navigator.of(context).pushReplacementNamed('/');
       },
       child: Container(
@@ -392,7 +387,7 @@ class UserProfileImage extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(
               _getImageFrameParametr(
-                screenWidth * 3 / 14,
+                screenWidth * 4 / 14,
               ),
             ),
             color: AppColors.whiteLight,

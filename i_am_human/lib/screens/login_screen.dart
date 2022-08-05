@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:i_am_human/data_access/shared_preferences.dart';
+import 'package:i_am_human/models/user.dart';
 import 'package:i_am_human/utils/colors.dart';
 import 'package:i_am_human/widgets/widgets.dart';
+
 
 class LoginWindow extends StatefulWidget {
   const LoginWindow({Key? key}) : super(key: key);
@@ -28,15 +31,17 @@ class LoginWindowState extends State<LoginWindow> {
     }
   }
 
-  void _auth() {
-    final login = _loginTextController.text;
-    final password = _passwordTextController.text;
-    //print(login + password);
-    if (login == 'admin@gmail.com' && password == 'admin') {
-      Navigator.of(context).pushReplacementNamed('/user_account_Screen');
+  void _auth() async {
+    final user = User('', '', '', 0, 0, 0, '', '', '', '');
+    await OperationsWithData.getUserData(user);
+    if (user.email == _loginTextController.text && user.password == _passwordTextController.text) {
+      //print('${user.email}' '${user.password}');
+      //print('${_loginTextController.text}' '${_passwordTextController.text}');
+      await Navigator.of(context).pushReplacementNamed('/user_account_screen');
+      await SupportPreferencesMethods.changeUserStatus();
     } else {
       _error = true;
-      _textError = 'error';
+      _textError = 'Check your data and try again';
       setState(() {});
     }
   }

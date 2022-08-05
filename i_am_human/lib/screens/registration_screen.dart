@@ -30,8 +30,8 @@ class RegisterWindowState extends State<RegisterWindow> {
     await OperationsWithData.setUserData(user);
     SupportPreferencesMethods.changeUserStatus();
     final userStatus = await SupportPreferencesMethods.getUserStatus();
-    print('${user.name}' '${user.email}'  '${user.password}' '$userStatus');
-    //Navigator.of(context).pushReplacementNamed('/user_account_Screen');
+    //print('${user.name}' '${user.email}'  '${user.password}' '$userStatus');
+    Navigator.of(context).pushReplacementNamed('/user_account_screen');
   }
 
   String? errorValidator(){
@@ -47,7 +47,6 @@ class RegisterWindowState extends State<RegisterWindow> {
         children: [
           BackgroundImage(),
           Container(
-            //margin: EdgeInsets.only(top: 160),
             margin: EdgeInsets.only(
                 top: screenHeight / 6,),
             height: 280,
