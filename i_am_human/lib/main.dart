@@ -1,11 +1,15 @@
 //import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:i_am_human/l10n/l10n.dart';
 import 'package:i_am_human/screens/home_screen.dart';
 import 'package:i_am_human/screens/login_screen.dart';
 import 'package:i_am_human/screens/registration_screen.dart';
 import 'package:i_am_human/screens/user_account_screen.dart';
 import 'package:i_am_human/utils/utils.dart';
+
 
 void main() {
   runApp(const HumanAppStart());
@@ -29,6 +33,13 @@ class HumanAppStart extends StatelessWidget {
         fontFamily: 'RobotoSlab',
         scaffoldBackgroundColor: AppColors.white,
       ),
+      supportedLocales: L10n.all,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate
+      ],
       initialRoute: '/',
       onGenerateRoute: (settings) {
         return MaterialPageRoute<void>(

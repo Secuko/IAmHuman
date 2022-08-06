@@ -20,7 +20,7 @@ class RegisterWindowState extends State<RegisterWindow> {
   String _textError = ''; 
   bool _error = false;
 
-  void _createAccount() async {
+  Future _createAccount() async {
     final name = _nameTextController.text;
     final login = _loginTextController.text;
     final password = _passwordTextController.text;
@@ -28,7 +28,7 @@ class RegisterWindowState extends State<RegisterWindow> {
     final convertedDateTime = "${now.hour.toString().padLeft(2,'0')}:${now.minute.toString().padLeft(2,'0')}";
     final user = User(name, login, password, 0, 0, 0, '', '', '', convertedDateTime);
     await OperationsWithData.setUserData(user);
-    SupportPreferencesMethods.changeUserStatus();
+    await SupportPreferencesMethods.changeUserStatus();
     final userStatus = await SupportPreferencesMethods.getUserStatus();
     //print('${user.name}' '${user.email}'  '${user.password}' '$userStatus');
     Navigator.of(context).pushReplacementNamed('/user_account_screen');

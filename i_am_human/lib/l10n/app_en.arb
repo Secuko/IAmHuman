@@ -1,0 +1,119 @@
+{
+    "language": "English",
+    "@language":{
+      "description": "The current Language"
+    },
+    "userAge": "Age",
+    "@userAge":{
+      "description": "The age of user"
+    },
+    "userHeight": "Height",
+    "@userHeight":{
+      "description": "The height of user"
+    },
+    "userWeight": "Weight",
+    "@userWeight":{
+      "description": "The weight of user"
+    },
+    "homePage": "Home",
+    "@homePage":{
+      "description": "User account home page"
+    },
+    "dataAPI": "Data API",
+    "@dataAPI":{
+      "description": "Data API getting page"
+    },
+    "settingsPage": "Settings",
+    "@settings":{
+      "description": "User account settings page"
+    },
+    "commonSettings": "Common settings",
+    "@commonSettings":{
+      "description": "Common settings of user account"
+    },
+    "languageSettings": "Language",
+    "@languageSettings":{
+      "description": "Language settings"
+    },
+    "notifications": "Notifications",
+    "@notifications":{
+      "description": "Notifications settings"
+    },
+    "style": "style",
+    "@style":{
+      "description": "Style settings"
+    },
+    "privacySettings": "Privacy settings",
+    "@privacySettings":{
+      "description": "Privacy settings of user account"
+    },
+    "privacy": "Privacy",
+    "@privacy":{
+      "description": "Privacy settings"
+    },
+    "dataAndStorage": "Data & Storage",
+    "@dataAndStorage":{
+      "description": "Data & Storage settings"
+    },
+    "phone": "Phone",
+    "@phone":{
+      "description": "Phone settings"
+    },
+    "logout": "Logout",
+    "@logout":{
+      "description": "Logout"
+    },
+    "addImage": "Add image",
+    "@addImage":{
+      "description": "Add image"
+    },
+    "name": "Name",
+    "@name":{
+      "description": "User name"
+    },
+    "email": "E-mail",
+    "@email":{
+      "description": "User email"
+    },
+    "password": "Password",
+    "@password":{
+      "description": "User password"
+    },
+    "registration": "Registration",
+    "@registration":{
+      "description": "Registration"
+    },
+    "signIn": "Sign In",
+    "@signIn":{
+      "description": "Sign In"
+    },
+    "haveNoAnAccount": "Have no an account?",
+    "@haveNoAnAccount":{
+      "description": "Have no an account title"
+    },
+    "alreadyHaveAccount": "Already have an account?",
+    "@alreadyHaveAccount":{
+      "description": "Already have an account title"
+    },
+    "shortPasswordError": "Password should have at least 8 symbols",
+    "@shortPasswordError":{
+      "description": "The error: password short then 8 symbols"
+    },
+    "simplePasswordError": "Password should have at least one upper case letter and one number",
+    "@simplePasswordError":{
+      "description": "The error: Password consist of only letters or letters without upper case"
+    },
+    "userEmailerror": "This email address already used",
+    "@userEmailerror":{
+      "description": "The error: input email adress is used by another user"
+    },
+    "incorrectEmailError": "Incorrect e-mail format",
+    "@incorrectEmailError":{
+      "description": "The error: Input e-mail is incorrect"
+    },
+    "emptyFieldError": "All fields should be filled in",
+    "@emptyFieldError":{
+      "description": "The error: Some fields are empty"
+    }
+    
+}
