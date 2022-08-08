@@ -114,6 +114,9 @@
     "emptyFieldError": "All fields should be filled in",
     "@emptyFieldError":{
       "description": "The error: Some fields are empty"
+    },
+    "userNameError": "Name should consist of only letters",
+    "@userNameError":{
+      "description": "The error: Name should consist of only letters"
     }
-    
 }

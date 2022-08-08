@@ -27,5 +27,6 @@
      "simplePasswordError": "Пароль должен содержать не менее одной заглавной буквы и цифры",
      "userEmailerror": "Этот e-mail уже используется",
      "incorrectEmailError": "Неправильный формат e-mail",
-     "emptyFieldError": "Все поля должны быть заполнены"
+     "emptyFieldError": "Все поля должны быть заполнены",
+     "userNameError": "Имя должно состоять только из букв"
 }

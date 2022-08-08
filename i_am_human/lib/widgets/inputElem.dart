@@ -21,6 +21,7 @@ class InputElem extends StatelessWidget {
         style: AppTypography.font16w,
         obscureText: isPassword,
         obscuringCharacter: '*',
+        textInputAction: TextInputAction.next,
         keyboardType: _getKeyboardType(),
         decoration: InputDecoration(
           filled: true,

@@ -31,6 +31,7 @@ class LoginWindowState extends State<LoginWindow> {
     }
   }
 
+
   void _auth() async {
     final user = User('', '', '', 0, 0, 0, '', '', '', '');
     await OperationsWithData.getUserData(user);
@@ -45,6 +46,7 @@ class LoginWindowState extends State<LoginWindow> {
       setState(() {});
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
