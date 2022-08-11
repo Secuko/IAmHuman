@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:i_am_human/data_access/shared_preferences.dart';
 import 'package:i_am_human/models/user.dart';
 import 'package:i_am_human/utils/utils.dart';
+import 'package:i_am_human/network/api_clients/api_clients.dart';
 
 class UserAccountScreen extends StatefulWidget {
   const UserAccountScreen({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class UserAccountScreen extends StatefulWidget {
 }
 
 class UserAccountScreenState extends State<UserAccountScreen> {
-  int _selectedIndex = 2;
+  int _selectedIndex = 1;
   void _onItemTapped(int index) {
     if (_selectedIndex == index) {
       return;
@@ -26,18 +27,18 @@ class UserAccountScreenState extends State<UserAccountScreen> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const UserAccountMainWidget(),
-    const Center(
-      child: Text(
-        'Data API',
-      ),
-    ),
+    const WeatherDataWidget(),
     const UserAccountSettingsWidget(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
+      body: SafeArea(
+        child: Center(
+          child: _widgetOptions.elementAt(_selectedIndex),
+        ),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.shifting,
         items: const <BottomNavigationBarItem>[
@@ -266,6 +267,10 @@ class _UserAccountSettingsWidgetState extends State<UserAccountSettingsWidget> {
                     const SizedBox(
                       height: 30,
                     ),
+                    const AppThemeSettingWidget(),
+                    const SizedBox(
+                      height: 30,
+                    ),
                     const LogoutButton(),
                   ],
                 ),
@@ -361,6 +366,64 @@ class LogoutButton extends StatelessWidget {
   }
 }
 
+class AppThemeSettingWidget extends StatefulWidget {
+  const AppThemeSettingWidget({Key? key}) : super(key: key);
+
+  @override
+  State<AppThemeSettingWidget> createState() => _AppThemeSettingWidgetState();
+}
+
+class _AppThemeSettingWidgetState extends State<AppThemeSettingWidget> {
+  late bool appThemeIsLight = false;
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentTheme();
+  }
+
+  Future getCurrentTheme() async {
+    appThemeIsLight = await SupportPreferencesMethods.getIsLightThemeStatus();
+    setState(
+      () {},
+    );
+  }
+
+  Future _changeTheme(bool value) async {
+    setState(
+      () {
+        appThemeIsLight = value;
+        print(appThemeIsLight);
+      },
+    );
+    await SupportPreferencesMethods.changeIsLightThemeStatus();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          margin: const EdgeInsets.only(right: 15),
+          child: const Icon(Icons.dark_mode),
+        ),
+        const Expanded(
+          child: Text(
+            'Application theme',
+            style: AppTypography.font20,
+          ),
+        ),
+        Switch(
+          value: appThemeIsLight,
+          activeColor: AppColors.green,
+          activeTrackColor: AppColors.greenLight,
+          onChanged: _changeTheme,
+        ),
+      ],
+    );
+  }
+}
+
 class UserProfileImage extends StatelessWidget {
   const UserProfileImage({Key? key}) : super(key: key);
   double _getImageFrameParametr(double width) {
@@ -401,6 +464,144 @@ class UserProfileImage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class WeatherDataWidget extends StatefulWidget {
+  const WeatherDataWidget({Key? key}) : super(key: key);
+
+  @override
+  State<WeatherDataWidget> createState() => _WeatherDataWidgetState();
+}
+
+class SupportWeatherImageIconsClass {
+  SupportWeatherImageIconsClass(this.icon, this.image);
+  final IconData icon;
+  final String image;
+}
+
+class SupportWeatherParametrClass {
+  SupportWeatherParametrClass(this.name, this.icon);
+  final String name;
+  final IconData icon;
+}
+
+class _WeatherDataWidgetState extends State<WeatherDataWidget> {
+  final Map<String, SupportWeatherImageIconsClass> weatherMap = {
+    'sunny': SupportWeatherImageIconsClass(
+      Icons.wb_sunny,
+      'assets/weather/sunny.jpg',
+    ),
+    'frosty': SupportWeatherImageIconsClass(
+      Icons.ac_unit,
+      'assets/weather/frosty.jpg',
+    ),
+    'cloudy': SupportWeatherImageIconsClass(
+      Icons.cloud,
+      'assets/weather/cloudy.jpg',
+    ),
+    'rainy': SupportWeatherImageIconsClass(
+      Icons.water_drop,
+      'assets/weather/rainy.jpg',
+    ),
+    'windy': SupportWeatherImageIconsClass(
+      Icons.storm,
+      'assets/weather/windy.jpg',
+    )
+  };
+
+  final List<SupportWeatherParametrClass> weatherParametrsList = [
+    SupportWeatherParametrClass('Feels like', Icons.plus_one),
+    SupportWeatherParametrClass('Humidity', Icons.water_drop),
+    SupportWeatherParametrClass('Pressure', Icons.timer),
+    SupportWeatherParametrClass('Wind speed', Icons.water),
+  ];
+
+  Widget headerWeatherWidget(String image) {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height - 56,
+      width: MediaQuery.of(context).size.width,
+      child: FittedBox(
+        alignment: Alignment.topCenter,
+        clipBehavior: Clip.hardEdge,
+        fit: (MediaQuery.of(context).size.width <
+                MediaQuery.of(context).size.height)
+            ? BoxFit.cover
+            : BoxFit.contain,
+        child: Image(
+          image: AssetImage(image),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    return Container(
+      color: AppColors.black,
+      child: Stack(
+        alignment: AlignmentDirectional.topCenter,
+        children: [
+          headerWeatherWidget(weatherMap['sunny']!.image),
+          ConstrainedBox(
+            constraints:
+                BoxConstraints(maxHeight: screenHeight - 56, maxWidth: 400),
+            child: Container(
+              height: 550,
+              margin: const EdgeInsets.only(top: 30),
+              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: AppColors.blackWithOpacity,
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 120,
+                      alignment: Alignment.center,
+                      color: AppColors.blue,
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 10,
+                      ),
+                      child: Icon(
+                        weatherMap['sunny']!.icon,
+                        size: 100,
+                        color: AppColors.white,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      children: weatherParametrsList
+                          .map((data) => WeatherParametr(data: data))
+                          .toList(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class WeatherParametr extends StatelessWidget {
+  const WeatherParametr({required this.data, Key? key}) : super(key: key);
+  final SupportWeatherParametrClass data;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        
+      ],
     );
   }
 }

@@ -15,6 +15,7 @@ abstract class _SharedPreferencesKeys {
   static const sloganKey = 'slogan_key';
   static const String dateKey = 'date_key';
   static const isLogin = 'is_Login';
+  static const isLightTheme = 'is_light_theme';
 }
 
 class OperationsWithData {
@@ -62,9 +63,18 @@ class SupportPreferencesMethods{
 
   static Future changeUserStatus() async{
     final  _storage = await SharedPreferences.getInstance();
-    //print('${_storage.getBool(_SharedPreferencesKeys.isLogin) ?? false}'  'before');
     final currentStatus = !(_storage.getBool(_SharedPreferencesKeys.isLogin) ?? false);
-    //print('$currentStatus' 'after');
     await _storage.setBool(_SharedPreferencesKeys.isLogin, currentStatus);
+  }
+  
+  static Future<bool> getIsLightThemeStatus() async {
+    final  _storage = await SharedPreferences.getInstance();
+    return _storage.getBool(_SharedPreferencesKeys.isLightTheme) ?? false;
+  } 
+
+  static Future changeIsLightThemeStatus() async{
+    final  _storage = await SharedPreferences.getInstance();
+    final currentStatus = !(_storage.getBool(_SharedPreferencesKeys.isLightTheme) ?? false);
+    await _storage.setBool(_SharedPreferencesKeys.isLightTheme, currentStatus);
   }
 }

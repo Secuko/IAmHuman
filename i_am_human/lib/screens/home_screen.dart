@@ -22,7 +22,7 @@ class HomeState extends State<Home> {
   }
 
   void getCurrentScreen() async {
-    var variable = await SupportPreferencesMethods.getUserStatus();
+    final variable = await SupportPreferencesMethods.getUserStatus();
     //print('$variable' + 'getCurrentScreen');
     //variable = false;
     //print(variable);
@@ -37,7 +37,7 @@ class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: SafeArea(
         child: Stack(
           alignment: AlignmentDirectional.topCenter,
           children: <Widget>[

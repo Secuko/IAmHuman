@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:i_am_human/data_access/shared_preferences.dart';
 import 'package:i_am_human/models/user.dart';
 import 'package:i_am_human/screens/login_screen.dart';
-import 'package:i_am_human/widgets/widgets.dart';
 import 'package:i_am_human/utils/utils.dart';
+import 'package:i_am_human/widgets/widgets.dart';
 
 class RegisterWindow extends StatefulWidget {
   const RegisterWindow({Key? key}) : super(key: key);
@@ -100,42 +100,44 @@ class RegisterWindowState extends State<RegisterWindow> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: Stack(
-        alignment: AlignmentDirectional.topCenter,
-        children: [
-          BackgroundImage(),
-          Container(
-            margin: EdgeInsets.only(
-              top: screenHeight / 6,
+      body: SafeArea(
+        child: Stack(
+          alignment: AlignmentDirectional.topCenter,
+          children: [
+            BackgroundImage(),
+            Container(
+              margin: EdgeInsets.only(
+                top: screenHeight / 6,
+              ),
+              height: 280,
+              width: 230,
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: LoginWindowState.getOpacity(),
+              ),
+              alignment: Alignment.center,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  if (_error) ErrorTextWidget(_textError),
+                  InputElem('Name', _nameTextController),
+                  InputElem('E-mail', _loginTextController),
+                  InputElem('Password', _passwordTextController),
+                  GestureDetector(
+                    onTap: () => Navigator.of(context)
+                        .pushReplacementNamed('/login_screen'),
+                    child: const TextUnderInputField('Already have an account?'),
+                  ),
+                  GestureDetector(
+                    onTap: _createAccount,
+                    child: const BottomButton('Register'),
+                  ),
+                ],
+              ),
             ),
-            height: 280,
-            width: 230,
-            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: LoginWindowState.getOpacity(),
-            ),
-            alignment: Alignment.center,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                if (_error) ErrorTextWidget(_textError),
-                InputElem('Name', _nameTextController),
-                InputElem('E-mail', _loginTextController),
-                InputElem('Password', _passwordTextController),
-                GestureDetector(
-                  onTap: () => Navigator.of(context)
-                      .pushReplacementNamed('/login_screen'),
-                  child: const TextUnderInputField('Already have an account?'),
-                ),
-                GestureDetector(
-                  onTap: _createAccount,
-                  child: const BottomButton('Register'),
-                ),
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
