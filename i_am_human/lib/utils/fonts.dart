@@ -8,12 +8,12 @@ class AppTypography {
 
   static const _color = AppColors.black;
 
-  static const font9 = TextStyle(
-    color: _color,
+  static const font50 = TextStyle(
+    color: AppColors.white,
     fontFamily: _roboslab,
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.normal,
-    fontSize: 26,
+    fontSize: 50,
   );
 
   static const font26 = TextStyle(
@@ -22,6 +22,14 @@ class AppTypography {
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.normal,
     fontSize: 26,
+  );
+
+  static const font22w = TextStyle(
+    color: AppColors.white,
+    fontFamily: _roboslab,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.normal,
+    fontSize: 22,
   );
 
   static const font20 = TextStyle(
@@ -94,5 +102,13 @@ class AppTypography {
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.w900,
     fontSize: 12,
+  );
+
+   static const font9 = TextStyle(
+    color: _color,
+    fontFamily: _roboslab,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.normal,
+    fontSize: 26,
   );
 }

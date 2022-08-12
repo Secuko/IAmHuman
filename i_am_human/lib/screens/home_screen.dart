@@ -21,11 +21,8 @@ class HomeState extends State<Home> {
     getCurrentScreen();
   }
 
-  void getCurrentScreen() async {
+  Future getCurrentScreen() async {
     final variable = await SupportPreferencesMethods.getUserStatus();
-    //print('$variable' + 'getCurrentScreen');
-    //variable = false;
-    //print(variable);
     if (variable){
       await Navigator.of(context).pushReplacementNamed('/user_account_screen');
     } else {

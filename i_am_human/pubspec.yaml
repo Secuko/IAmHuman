@@ -78,6 +78,7 @@ flutter:
     - assets/weather/cloudy.jpg
     - assets/weather/frosty.jpg
     - assets/weather/windy.jpg
+    - assets/weather/low_cloudy.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -1,19 +1,22 @@
 import 'dart:convert';
 import 'dart:io';
+
+import 'package:i_am_human/network/api_clients/responce_validation.dart';
 import 'package:i_am_human/network/entities/response.dart';
 
 class ApiClient {
   final client = HttpClient();
 
-  Future<List<Responce>> geResponces() async {
-    final json = await getResponce(
+  Future<Responce> getResponce() async {
+    final json = await getData(
       'https://api.openweathermap.org/data/2.5/weather?lat=56.12&lon=40.4&appid=5b28fca3bdb1bbe7e4a9959e5c1a3b0b',
-    ) as List<dynamic>;
-    final responce = json.map((dynamic e) => Responce.fromJson(e as Map<String,dynamic>)).toList();
+    ) as Map<String,dynamic>;
+    final responce = Responce.fromJson(json);
+    ResponceValidation.changeResponceFormatData(responce);
     return responce;
   }
 
-  Future<dynamic> getResponce(String url) async {
+  Future<dynamic> getData(String url) async {
     final _url = Uri.parse(url);
     final request = await client.getUrl(_url);
     final responce = await request.close();

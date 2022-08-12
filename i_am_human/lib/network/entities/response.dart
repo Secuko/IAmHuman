@@ -1,6 +1,8 @@
 import 'package:i_am_human/network/entities/clowds.dart';
 import 'package:i_am_human/network/entities/coord.dart';
 import 'package:i_am_human/network/entities/main.dart';
+import 'package:i_am_human/network/entities/rain.dart';
+import 'package:i_am_human/network/entities/snow.dart';
 import 'package:i_am_human/network/entities/sys.dart';
 import 'package:i_am_human/network/entities/weather.dart';
 import 'package:i_am_human/network/entities/wind.dart';
@@ -17,7 +19,9 @@ class Responce {
     required this.main,
     required this.visibility,
     required this.wind,
-    required this.clowds,
+    required this.clouds,
+    required this.rain,
+    required this.snow,
     required this.dt,
     required this.sys,
     required this.timezone,
@@ -35,7 +39,9 @@ class Responce {
   Main main;
   int visibility;
   Wind wind;
-  Clowds clowds;
+  Clouds clouds;
+  Rain? rain;
+  Snow? snow;
   int dt;
   Sys sys;
   int timezone;

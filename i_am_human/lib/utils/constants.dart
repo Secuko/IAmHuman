@@ -3,6 +3,3 @@ class Constants {
   static String emailRegex = r"^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$";
   static String nameRegex = r"^(([a-zA-Zа-яА-ЯёЁ]+\s){0,})+[a-zA-Zа-яА-ЯёЁ]+$";
 }
-//r"(^[a-zA-Z]+\s){0,}$"  
-//r"(^[a-zA-Zа-яА-ЯёЁ]+\s){0,}$"
-//а-яА-ЯёЁ
