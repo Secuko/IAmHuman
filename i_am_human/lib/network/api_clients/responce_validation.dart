@@ -4,8 +4,8 @@ import 'package:i_am_human/network/entities/response.dart';
 
 class ResponceValidation{
   static void changeResponceFormatData(Responce responce){
-    responce.main.temp-=273.15; 
-    responce.main.feelsLike-=273.15; 
+    responce.main.temp = ( responce.main.temp - 273.15).roundToDouble(); 
+    responce.main.feelsLike =  (responce.main.feelsLike - 273.15).roundToDouble(); 
   }
 
   static String getCurrentWeatherStatus(Responce responce){

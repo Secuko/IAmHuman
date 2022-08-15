@@ -8,20 +8,19 @@ class WeatherWidgetModel extends ChangeNotifier {
   Responce get responce => _responce;
 
   Future<void> reloadWeather() async {
-    await apiClient.getResponce();
+    _responce = await apiClient.getResponce();
     notifyListeners();
   }
-
-  void getWeather() {}
 }
 
 class WeatherModelProvider extends InheritedNotifier {
-  final WeatherWidgetModel model;
   const WeatherModelProvider({
-    Key? key,
     required this.model,
     required Widget child,
+    Key? key,
   }) : super(key: key, notifier: model, child: child);
+  final WeatherWidgetModel model;
+
   static WeatherModelProvider? watch(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<WeatherModelProvider>();
   }

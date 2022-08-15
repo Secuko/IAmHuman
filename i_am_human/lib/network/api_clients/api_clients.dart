@@ -13,6 +13,7 @@ class ApiClient {
     ) as Map<String,dynamic>;
     final responce = Responce.fromJson(json);
     ResponceValidation.changeResponceFormatData(responce);
+    print(responce.main.temp);
     return responce;
   }
 
