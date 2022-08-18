@@ -1,26 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:i_am_human/data_access/shared_preferences.dart';
-import 'package:i_am_human/models/user.dart';
 import 'package:i_am_human/models/weather_widget_model.dart';
-import 'package:i_am_human/network/api_clients/api_clients.dart';
-import 'package:i_am_human/network/entities/response.dart';
-import 'package:i_am_human/utils/utils.dart';
 import 'package:i_am_human/network/api_clients/responce_validation.dart';
-import 'package:i_am_human/screens/user_account_settings_screen.dart';
-
-class SupportWeatherImageIconsClass {
-  SupportWeatherImageIconsClass(this.icon, this.image);
-  final IconData icon;
-  final String image;
-}
-
-class SupportWeatherParametrClass {
-  SupportWeatherParametrClass(this.name, this.icon, this.parametr, this.units);
-  final String name;
-  final IconData icon;
-  final double parametr;
-  final String units;
-}
+import 'package:i_am_human/utils/utils.dart';
 
 class WeatherDataWidget extends StatefulWidget {
   const WeatherDataWidget({Key? key}) : super(key: key);
@@ -31,8 +12,48 @@ class WeatherDataWidget extends StatefulWidget {
 
 class _WeatherDataWidgetState extends State<WeatherDataWidget> {
   final model = WeatherWidgetModel();
+  @override
+  Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    return WeatherModelProvider(
+      model: model,
+      child: Container(
+        color: AppColors.whiteLight,
+        child: Stack(
+          alignment: AlignmentDirectional.topCenter,
+          children: [
+            const _BackgroundWeatherWidget(),
+            ConstrainedBox(
+              constraints: BoxConstraints(
+                minHeight: 300,
+                maxHeight: screenHeight - 56,
+                maxWidth: 400,
+              ),
+              child: Container(
+                margin: const EdgeInsets.only(top: 45),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: AppColors.blackWithOpacity,
+                ),
+                child: const InformingBodyWidget(),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
-  Widget backgroundWeatherWidget(String image) {
+class _BackgroundWeatherWidget extends StatelessWidget {
+  const _BackgroundWeatherWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    WeatherModelProvider.read(context)?.model.reloadWeather();
+    final weather = WeatherModelProvider.read(context)!.model.responce;
     return SizedBox(
       height: MediaQuery.of(context).size.height - 56,
       width: MediaQuery.of(context).size.width,
@@ -44,40 +65,9 @@ class _WeatherDataWidgetState extends State<WeatherDataWidget> {
             ? BoxFit.cover
             : BoxFit.contain,
         child: Image(
-          image: AssetImage(image),
-        ),
-      ),
-    );
-  }
-
-
-  @override
-  Widget build(BuildContext context) {
-    //ApiClient().getResponce();
-    final screenHeight = MediaQuery.of(context).size.height;
-    return WeatherModelProvider(
-      model: model,
-      child: Container(
-        color: AppColors.whiteLight,
-        child: Stack(
-          alignment: AlignmentDirectional.topCenter,
-          children: [
-            //backgroundWeatherWidget(weatherMap['sunny']!.image),
-            ConstrainedBox(
-              constraints: BoxConstraints(
-                  minHeight: 300, maxHeight: screenHeight - 56, maxWidth: 400,),
-              child: Container(
-                margin: const EdgeInsets.only(top: 45),
-                padding:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: AppColors.blackWithOpacity,
-                ),
-                child: InformingBodyWidget()
-              ),
-            ),
-          ],
+          image: AssetImage(
+            ResponceValidation.getCurrentWeatherImageString(weather),
+          ),
         ),
       ),
     );
@@ -85,83 +75,30 @@ class _WeatherDataWidgetState extends State<WeatherDataWidget> {
 }
 
 class InformingBodyWidget extends StatelessWidget {
-  InformingBodyWidget({ Key? key }) : super(key: key);
-
-  final List<SupportWeatherParametrClass> weatherParametrsList = [
-    SupportWeatherParametrClass(
-      'Feels like',
-      Icons.plus_one,
-      25,
-      '°C',
-    ),
-    SupportWeatherParametrClass(
-      'Humidity',
-      Icons.water_drop_outlined,
-      73,
-      '%',
-    ),
-    SupportWeatherParametrClass(
-      'Pressure',
-      Icons.timer_outlined,
-      755,
-      ' мм.рт.ст.',
-    ),
-    SupportWeatherParametrClass(
-      'Wind speed',
-      Icons.water_outlined,
-      15.4,
-      ' м/с',
-    ),
-  ];
-
-  final Map<String, SupportWeatherImageIconsClass> weatherMap = {
-    'sunny': SupportWeatherImageIconsClass(
-      Icons.wb_sunny,
-      'assets/weather/sunny.jpg',
-    ),
-    'snowy': SupportWeatherImageIconsClass(
-      Icons.cloudy_snowing,
-      'assets/weather/frosty.jpg',
-    ),
-    'cloudy': SupportWeatherImageIconsClass(
-      Icons.cloud,
-      'assets/weather/cloudy.jpg',
-    ),
-    'rainy': SupportWeatherImageIconsClass(
-      Icons.water_drop,
-      'assets/weather/rainy.jpg',
-    ),
-    'low_cloudy': SupportWeatherImageIconsClass(
-      Icons.cloud_outlined,
-      'assets/weather/low_cloudy.jpg',
-    )
-  };
+  const InformingBodyWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    WeatherModelProvider.watch(context)?.model.reloadWeather();
-    final weather = WeatherModelProvider.read(context)!.model.responce;
+    final weather = WeatherModelProvider.watch(context)!.model.responce;
     return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    HeaderWeatherWidget(
-                        icon: weatherMap[
-                                ResponceValidation.getCurrentWeatherStatus(
-                                    weather)]!
-                            .icon),
-                    Column(
-                      children: weatherParametrsList
-                          .map((data) => WeatherParametr(data: data))
-                          .toList(),
-                    ),
-                  ],
-                );
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        HeaderWeatherWidget(
+          icon: ResponceValidation.getCurrentWeatherIcon(weather),
+        ),
+        Column(
+          children: ResponceValidation.parametrsList(weather)
+              .map((data) => WeatherParametrWidget(data: data))
+              .toList(),
+        ),
+      ],
+    );
   }
 }
 
-class WeatherParametr extends StatelessWidget {
-  const WeatherParametr({required this.data, Key? key}) : super(key: key);
+class WeatherParametrWidget extends StatelessWidget {
+  const WeatherParametrWidget({required this.data, Key? key}) : super(key: key);
   final SupportWeatherParametrClass data;
 
   @override
@@ -194,7 +131,7 @@ class HeaderWeatherWidget extends StatelessWidget {
   final IconData icon;
   @override
   Widget build(BuildContext context) {
-    final weather = WeatherModelProvider.read(context)!.model.responce;
+    final weather = WeatherModelProvider.watch(context)!.model.responce;
 
     return Wrap(
       alignment: WrapAlignment.center,
@@ -216,7 +153,7 @@ class HeaderWeatherWidget extends StatelessWidget {
           width: 160,
           alignment: Alignment.center,
           child: Text(
-            ResponceValidation.tempToString(weather),
+            '${ResponceValidation.tempToString(weather)}°C',
             style: AppTypography.font50,
           ),
         ),

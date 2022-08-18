@@ -81,8 +81,7 @@ class UserAccountMainWidget extends StatefulWidget {
 class _UserAccountMainWidgetState extends State<UserAccountMainWidget> {
   _UserAccountMainWidgetState();
 
-  User user =
-      User('null', 'null', 'null', 0, 0, 0, 'null', 'null', 'null', 'null');
+  User user = User('null', 'null', 'null', 0, 0, 0, 'null', 'null', 'null', 'null');
 
   @override
   void initState() {
