@@ -118,5 +118,25 @@
     "userNameError": "Name should consist of only letters",
     "@userNameError":{
       "description": "The error: Name should consist of only letters"
+    },
+    "feelsLike": "Feels like",
+    "@feelsLike":{
+      "description": "This temperature parameter accounts for the human perception of weather"
+    },
+    "humidity": "Humidity",
+    "@humidity":{
+      "description": "Humidity"
+    },
+    "pressure": "Pressure",
+    "@pressure":{
+      "description": "Atmospheric pressure"
+    },
+    "windSpeed": "Wind speed",
+    "@windSpeed":{
+      "description": "Wind speed"
+    },
+    "applicationTheme": "Application Theme",
+    "@applicationTheme":{
+      "description": "Application Theme"
     }
 }

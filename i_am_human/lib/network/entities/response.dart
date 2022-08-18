@@ -30,6 +30,7 @@ class Responce {
     required this.cod,
   });
 
+
   factory Responce.fromJson(Map<String,dynamic> json) => _$ResponceFromJson(json);
   Map<String,dynamic> toJson() => _$ResponceToJson(this);
 
